@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="jquery-1.11.3.js"></script>
+    <style>
+        #main{
+          width: 750px;
+            height: 500px;
+            background: #7cfc00;
+        }
+        .lf{
+          float: left;
+        }
+        .rt{
+            float: right;
+        }
+        .clear{
+            clear: both;
+        }
+        li{
+          list-style: none;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+        }
+        #main>ul>li:first-child{
+            width: 100px;
+            background: #666666;
+            height: 500px;
+        }
+        .nav{
+            padding: 25px ;
+        }
+        .nav>li{
+            width: 50px;
+            height: 50px;
+            background: red;
+            border: 1px solid #000000;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+        }
+        .block{
+            display: block;
+        }
+        .hide{
+            display: none;
+        }
+        .chatSec>ul>li:first-child{
+            width: 200px;
+            height: 500px;
+        }
+        .chatSec>ul>li:last-child{
+            width: 450px;
+            background: #BFB2B2;
+            height: 500px;
+        }
+        .chatList>li{
+            padding: 10px;
+            border: 1px solid black;
+            cursor: pointer;
+            text-align: center;
+        }
+        .chatHeader{
+            border: 1px solid black;
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            font-size: 30px;
+            color: red;
+        }
+        .chatBack{
+            background-color: #989090;
+        }
+        iframe{
+            width: 450px;
+            height: 450px;
+        }
+        .section{
+            font-size: 30px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <ul>
+        <li class="lf">
+            <ul class="nav">
+                <li>icon</li>
+                <li class="chat">聊天</li>
+                <li>通讯录</li>
+                <li>其他</li>
+            </ul>
+        </li>
+        <li class="rt section block">icon页面</li>
+        <li class="rt chatSec hide">
+            <!--聊天名单-->
+            <ul>
+                <li class="lf">
+                    <ul class="chatList">
+                        <li>小明</li>
+                        <li>小王</li>
+                        <li>小刘</li>
+                        <li>小李</li>
+                    </ul>
+                </li>
+                <!--聊天界面-->
+                <li class="rt">
+                    <div class="chatHeader">小明</div>
+                    <div>
+                        <iframe src="chat.html" frameborder="0" id="iframe"></iframe>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+</body>
+<script>
+$(function(){
+//    导航栏切换
+    $(".nav li:not('.chat')").click(function(){
+       $(".section").addClass("display").html($(this).html()+"页面").removeClass("hide");
+        $(".chatSec").addClass("hide").removeClass("display")
+    });
+//    聊天界面
+    $(".chat").click(function(){
+        $(".section").addClass("hide").removeClass("display");
+        $(".chatSec").addClass("display").removeClass("hide")
+    })
+//    姓名切换
+    $(".chatList li").click(function(){
+        $(this).addClass("chatBack").siblings("li").removeClass("chatBack")
+        $(".chatHeader").html($(this).html())
+        document.getElementById('iframe').src="chat.html";
+    })
+
+
+
+})
+</script>
+</html>
